@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIREWISE | Microgravity Combustion Intelligence</title>
+<style>
+:root{--bg:#071321;--panel:#102338;--orange:#ff8b38;--blue:#50b8e8;--text:#edf5ff;--muted:#a9bdce}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+header{padding:25px 7%;background:linear-gradient(110deg,#102c46,#071321);border-bottom:1px solid #29435a}
+.logo{color:var(--orange);font-size:14px;font-weight:bold;letter-spacing:3px}
+h1{font-size:42px;margin:12px 0}
+header p{color:var(--muted);max-width:700px;line-height:1.6}
+main{max-width:1150px;margin:auto;padding:28px 20px}
+.notice{background:#382b1c;border:1px solid #a56c32;padding:13px;border-radius:9px;color:#ffd49b;font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin:22px 0}
+.stat,.panel,.experiment{background:var(--panel);border:1px solid #29435a;border-radius:12px;padding:18px}
+.stat strong{display:block;font-size:28px;color:var(--orange);margin-bottom:5px}
+.stat span,.muted{color:var(--muted);font-size:13px}
+h2{font-size:21px;margin-top:28px}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+input,select,button{padding:12px;border-radius:7px;border:1px solid #38536b;background:#102338;color:white}
+input{flex:1;min-width:190px}
+button{cursor:pointer;background:var(--orange);border:0;color:#171717;font-weight:bold}
+button:hover{opacity:.85}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.experiment h3{margin:5px 0 10px;color:var(--blue)}
+.tag{display:inline-block;background:#253d53;color:#bfe8ff;padding:5px 8px;border-radius:20px;font-size:11px}
+.experiment p{line-height:1.5;color:var(--muted);font-size:14px}
+.score{font-size:13px;color:#ffbd83;margin:10px 0}
+.panel{margin-top:18px;line-height:1.6}
+footer{text-align:center;padding:30px;color:var(--muted);font-size:12px}
+a{color:var(--blue)}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">NASA SPACE APPS CHALLENGE • PROJECT</div>
+<h1>🔥 FIREWISE</h1>
+<p><strong>Microgravity Combustion Intelligence Dashboard</strong><br>
+Explore combustion research, compare investigation themes and understand why fire behaves differently in microgravity.</p>
+</header>
+<main>
+<div class="notice"><strong>Prototype data notice:</strong> This demonstration uses illustrative descriptions and ranking scores. They are not official NASA measurements, findings or hazard ratings. Verify investigation details using the linked NASA sources before drawing scientific conclusions.</div>
+
+<div class="stats">
+<div class="stat"><strong id="total">4</strong><span>Research entries in prototype</span></div>
+<div class="stat"><strong>3</strong><span>Dashboard functions</span></div>
+<div class="stat"><strong>1</strong><span>Mission focus: fire safety</span></div>
+</div>
+
+<h2>Investigation Explorer</h2>
+<p class="muted">Search and filter the prototype research entries.</p>
+<div class="controls">
+<input id="search" placeholder="Search investigations..." oninput="render()">
+<select id="category" onchange="render()">
+<option value="all">All themes</option>
+<option value="flame">Flame behaviour</option>
+<option value="materials">Material combustion</option>
+<option value="safety">Spacecraft fire safety</option>
+</select>
+<select id="sort" onchange="render()">
+<option value="rank">Sort by relevance score</option>
+<option value="name">Sort alphabetically</option>
+</select>
+</div>
+<div class="cards" id="cards"></div>
+
+<div class="panel">
+<h2>How FIREWISE interprets research</h2>
+<p><strong>1. Summarize:</strong> Present a short, accessible overview of each research theme.</p>
+<p><strong>2. Rank:</strong> Arrange prototype entries using an illustrative relevance score. This is a demonstration ranking created for this dashboard, not a NASA assessment.</p>
+<p><strong>3. Interpret:</strong> Explain how research themes relate to understanding combustion and spacecraft fire safety.</p>
+</div>
+
+<div class="panel">
+<h2>Why study flames in microgravity?</h2>
+<p>On Earth, buoyancy strongly influences how hot gases move around a flame. In microgravity, buoyancy-driven flow is greatly reduced. This changes the environment in which combustion occurs and makes controlled experiments valuable for understanding fire behaviour in spacecraft.</p>
+<p class="muted">This is a simplified scientific introduction, not a summary of a particular experiment.</p>
+</div>
+
+<div class="panel">
+<h2>Mission relevance</h2>
+<p>Understanding combustion in spacecraft environments can contribute to research on material flammability, fire detection, prevention and crew safety. FIREWISE aims to make relevant research easier to explore and understand.</p>
+</div>
+
+<div class="panel">
+<h2>Research links</h2>
+<ul>
+<li><a href="https://www.nasa.gov/" target="_blank" rel="noopener">NASA official website</a></li>
+<li><a href="https://www.nasa.gov/mission/station/" target="_blank" rel="noopener">International Space Station research</a></li>
+<li><a href="https://science.nasa.gov/" target="_blank" rel="noopener">NASA Science</a></li>
+</ul>
+<p class="muted">Use the official NASA pages to verify specific investigation names, objectives and results.</p>
+</div>
+</main>
+<footer>FIREWISE • Student prototype • NASA Space Apps Challenge 2026</footer>
+
+<script>
+const entries=[
+{name:"BASS-II",theme:"materials",score:92,topic:"Material combustion",summary:"Prototype research entry for exploring material burning and fire behaviour in microgravity. Check NASA's official investigation records for verified objectives and findings."},
+{name:"SAFFIRE",theme:"safety",score:95,topic:"Spacecraft fire safety",summary:"Prototype entry focused on spacecraft fire-safety research. Consult NASA sources for the specific experiment objectives, methods and results."},
+{name:"FLEX",theme:"flame",score:88,topic:"Flame behaviour",summary:"Prototype entry for studying flame behaviour and combustion processes. Verify the exact investigation details using NASA's published research."},
+{name:"SAME",theme:"materials",score:80,topic:"Material flammability",summary:"Prototype entry for exploring material-related combustion questions. The description and relevance score here are illustrative, not official findings."}
+];
+function render(){
+const q=document.getElementById("search").value.toLowerCase();
+const cat=document.getElementById("category").value;
+let data=entries.filter(x=>(x.name+" "+x.topic+" "+x.summary).toLowerCase().includes(q)&&(cat==="all"||x.theme===cat));
+if(document.getElementById("sort").value==="rank")data.sort((a,b)=>b.score-a.score);
+else data.sort((a,b)=>a.name.localeCompare(b.name));
+document.getElementById("total").textContent=data.length;
+document.getElementById("cards").innerHTML=data.map(x=>`
+<article class="experiment">
+<span class="tag">${x.topic}</span>
+<h3>${x.name}</h3>
+<p>${x.summary}</p>
+<div class="score">Illustrative relevance score: ${x.score}/100</div>
+</article>`).join("")||"<p>No matching entries. Try another search.</p>";
+}
+render();
+</script>
+</body>
+</html>
